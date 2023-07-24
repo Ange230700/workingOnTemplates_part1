@@ -338,6 +338,13 @@ form > .fields > .field.half {
 
 /* /!\ There are some properties missing here! */
 
+@media screen and (max-width: 480px) {
+  form > .fields > .field.half {
+    width: calc(100% - 1.5rem);/* because we want name and email
+    inputs in two rows instead of columns */
+  }
+}
+
 label {
   color: white;
   display: block; /* 'cause we want this element to fill up all the space allowed */
