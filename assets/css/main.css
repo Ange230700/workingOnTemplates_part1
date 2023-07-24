@@ -322,7 +322,7 @@ form > .fields {
   display: flex;
   flex-wrap: wrap;
   width: calc(100% + 3rem);
-  margin: -1.5rem 0 2rem;
+  margin: -1.5rem 0 2rem -1.5rem;
 }
 
 form > .fields > .field {
@@ -339,8 +339,20 @@ form > .fields > .field.half {
 /* /!\ There are some properties missing here! */
 
 @media screen and (max-width: 480px) {
+  form > .fields {
+    width: calc(100% + 3rem);
+    margin: -1.5rem 0 2rem -1.5rem;
+  }
+
+  form > .fields > .field {
+    padding: 1.5rem 0 0 1.5rem;
+    width: calc(100% - 1.5rem);
+  }
+
   form > .fields > .field.half {
-    width: calc(100% - 1.5rem);/* because we want name and email
+    width: calc(
+      100% - 1.5rem
+    ); /* because we want name and email
     inputs in two rows instead of columns */
   }
 }
