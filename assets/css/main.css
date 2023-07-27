@@ -582,6 +582,18 @@ button:hover,
 
 /* /!\ There are some properties missing here! */
 
+input[type="submit"].primary,
+input[type="reset"].primary,
+input[type="button"].primary,
+button.primary,
+.button.primary {
+  background-color: white;
+  color: #1b1f22 !important;
+  font-weight: 600;
+}
+
+/* /!\ There are some properties missing here! */
+
 input[type="submit"],
 input[type="reset"],
 input[type="button"],
