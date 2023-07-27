@@ -175,9 +175,55 @@
     });
 
     $body.on('click', function (event) {
-        if ( $body.hasClass('is-article-visible') )
+        if ($body.hasClass('is-article-visible'))
             $main._hide(true);
     });
 
-    
+    $window.on('keyup', function (event) {
+        switch (event.keyCode) {
+            case 27:
+                if ($body.hasClass('is-article-visible'))
+                    $main._hide(true);
+                break;
+            default:
+                break;
+        }
+    });
+
+    $window.on('hashchange', function(event){
+        if(location.hash == '' || location.hash == '#'){
+            event.preventDefault();
+            event.stopPropagation();
+            $main._hide();
+        }
+
+        else if ($main_articles.filter(location.hash).length > 0){
+            event.preventDefault();
+            event.stopPropagation();
+            $main._show(location.hash.substr(1));
+        }
+    });
+
+    if ('scrollRestoration' in history)
+        history.scrollRestoration = 'manual';
+    else{
+        var oldScrollPos = 0,
+            scrollPos = 0,
+            $htmlbody = $('html,body');
+        $window
+            .on('scroll', function(){
+                oldScrollPos = scrollPos;
+                scrollPos = $htmlbody.scrollTop();
+            })
+            .on('hashchange', function(){
+                $window.scrollTop(oldScrollPos);
+            })
+    }
+
+    $main.hide();
+    $main_articles.hide();
+    if(location.hash != '' && location.hash !== '#')
+        $window.on('load', function(){
+            $main._show(location.hash.substr(1), true);
+        })
 })(jQuery);
