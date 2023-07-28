@@ -915,7 +915,38 @@ body.is-preload #header .content .inner {
   opacity: 1;
 }
 
-/* /!\ There are some properties missing here! */
+#main article .close{
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4rem;
+  height: 4rem;
+  cursor: pointer;
+  text-indent: 4rem;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+#main article .close:before{
+  transition: background-color 0.2s ease-in-out;
+  content: "";
+  display: block;
+  position: absolute;
+  top: .75rem;
+  right: .75rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 100%;
+}
+
+#main article .close:hover:before{
+  background-color: rgba(255, 255, 255, 0.075);
+}
+
+#main article .close:active:before{
+  background-color: rgba(255, 255, 255, 0.175);
+}
 
 @media screen and (max-width: 736px) {
   #main article {
