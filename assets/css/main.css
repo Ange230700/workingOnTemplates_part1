@@ -2,8 +2,6 @@
 @import url(fontawesome-all.min.css);
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300italic,600italic,300,600");
 
-/* /!\ In that code, I ain't gon' include the preprocessors propreties */
-
 /*-------------------INITIALIZATION--------------------*/
 html,
 body,
@@ -159,16 +157,13 @@ textarea {
 /*----------------------BASIC------------------------*/
 
 @-ms-viewport {
-  /* I feel like this is about responsivity 
-  Simply because I want the webpage to 
+  width: device-width; /* because I want the webpage to 
   take width of my device, whatever what it is.*/
-  width: device-width;
 }
 
 @media screen and (max-width: 480px) {
   html,
   body {
-    /* This sample of code is actually very clever */
     min-width: 320px;
   }
 }
@@ -226,7 +221,7 @@ textarea {
   font-family: "Source Sans Pro", sans-serif;
   font-weight: 300;
   font-size: 1rem;
-  line-height: 1.65; /* cause We want a bigger spacing between  */
+  line-height: 1.65;
 }
 
 a {
@@ -234,7 +229,7 @@ a {
     border-bottom-color 0.2s ease-in-out;
   border-bottom: dotted 1px rgba(255, 255, 255, 0.5);
   text-decoration: none;
-  color: inherit; /* cause I want the same color than the text */
+  color: inherit; /* because I want the same color than the text */
 }
 
 a:hover {
@@ -278,7 +273,7 @@ h4.major,
 h5.major,
 h6.major {
   border-bottom: solid 1px white;
-  width: max-content; /* 'cause I just want to underline the word in the title */
+  width: max-content; /* because I just want to underline the word in the title */
   padding-bottom: 0.5rem;
   margin: 0 0 2rem 0;
 }
@@ -353,7 +348,7 @@ form > .fields > .field.half {
     width: calc(
       100% - 1.5rem
     ); /* because we want name and email
-    inputs in two rows instead of columns */
+    inputs in two columns instead of rows for mobile version */
   }
 }
 
@@ -538,6 +533,10 @@ ul.actions li {
 
 /* /!\ There are some properties missing here! */
 
+ul.icons li a:active {
+  background-color: rgba(255, 255, 255, 0.175);
+}
+
 /*----------------------TABLE-----------------------*/
 
 /* /!\ There are some properties missing here! */
@@ -580,6 +579,14 @@ button:hover,
   background-color: rgba(255, 255, 255, 0.075);
 }
 
+input[type="submit"]:active,
+input[type="reset"]:active,
+input[type="button"]:active,
+button:active,
+.button:active {
+  background-color: rgba(255, 255, 255, 0.175);
+}
+
 /* /!\ There are some properties missing here! */
 
 input[type="submit"].primary,
@@ -604,6 +611,15 @@ button {
 /*----------------------BG-----------------------*/
 
 /* /!\ There are some properties missing here! */
+
+body.is-article-visible #bg::after {
+  transform: scale(1.0825);
+  filter: blur(0.2rem);
+}
+
+body.is-preload #bg::before {
+  background-color: black;
+}
 
 /*----------------------WRAPPER-----------------------*/
 
@@ -761,7 +777,6 @@ button {
   background-color: rgba(255, 255, 255, 0.175);
 }
 
-/*
 #header nav.use-middle:after {
   content: "";
   display: block;
@@ -780,24 +795,23 @@ body.is-article-visible #header {
   transform: scale(0.95);
   filter: blur(0.1rem);
   opacity: 0;
-}*/
+} /**/
+
+body.is-preload #header {
+  filter: blur(0.125rem);
+}
 
 /*
-body.is-preload #header {
-  filter: blur(0.125rem); 
-}
-
 body.is-preload #header > * {
   opacity: 0; 
-}
+}*/
 
 body.is-preload #header .content .inner {
-  max-height: 0; 
-  padding-top: 0; 
-  padding-bottom: 0; 
-  opacity: 0; 
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  opacity: 0;
 }
-*/
 
 @media screen and (max-width: 980px) {
   #header .content p br {
@@ -896,6 +910,11 @@ body.is-preload #header .content .inner {
   /*opacity: 0; */
 }
 
+#main article.active {
+  transform: translateY(0);
+  opacity: 1;
+}
+
 /* /!\ There are some properties missing here! */
 
 @media screen and (max-width: 736px) {
@@ -913,3 +932,17 @@ body.is-preload #header .content .inner {
 }
 
 /*----------------------FOOTER-----------------------*/
+
+/* /!\ There are some properties missing here! */
+
+/*
+
+body.is-article-visible #footer {
+  transform: scale(0.95);
+  filter: blur(0.1rem);
+  opacity: 0;
+}
+
+body.is-preload #footer{
+  opacity: 0;
+}*/

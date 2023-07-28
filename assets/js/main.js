@@ -2,13 +2,12 @@
 
     var $window = $(window),
         $body = $('body'),
-        $header = $('#header'),
         $wrapper = $('#wrapper'),
+        $header = $('#header'),
         $footer = $('#footer'),
         $main = $('#main'),
         $main_articles = $main.children('article');
 
-    // Breakpoints.
     breakpoints({
         xlarge: ['1281px', '1680px'],
         large: ['981px', '1280px'],
@@ -18,14 +17,12 @@
         xxsmall: [null, '360px']
     });
 
-    // Play initial animations on page load.
     $window.on('load', function () {
         window.setTimeout(function () {
             $body.removeClass('is-preload');
         }, 100);
-    })
+    });
 
-    // Fix: Flexbox min-height bug on IE.
     if (browser.name == 'ie') {
         var flexboxFixTimeoutId;
 
@@ -40,34 +37,26 @@
         }).triggerHandler('resize.flexbox-fix');
     }
 
-    // Nav.
     var $nav = $header.children('nav'),
         $nav_li = $nav.find('li');
 
-    // Add "middle" alignment classes if we're dealing with an even number of items.
     if ($nav_li.length % 2 == 0) {
         $nav.addClass('use-middle');
         $nav_li.eq(($nav_li.length / 2)).addClass('is-middle');
     }
 
-    // Main.
     var delay = 325,
         locked = false;
 
-    // Methods.
     $main._show = function (id, initial) {
         var $article = $main_articles.filter('#' + id);
 
-        // No such article? Bail.
         if ($article.length == 0)
             return;
 
-        // Handle lock.
-
-        // Already locked? Speed through "show" steps w/o delays.
         if (locked || (typeof initial != 'undefined' && initial === true)) {
-            $body.addClass('is-article-visible');
             $body.addClass('is-switching');
+            $body.addClass('is-article-visible');
             $main_articles.removeClass('active');
             $header.hide();
             $footer.hide();
@@ -94,6 +83,10 @@
                     $window
                         .scrollTop(0)
                         .triggerHandler('resize.flexbox-fix');
+
+                    setTimeout(function () {
+                        locked = false;
+                    }, delay)
                 }, 25);
             }, delay);
         }
@@ -113,9 +106,9 @@
                         .triggerHandler('resize.flexbox-fix');
                     setTimeout(function () {
                         locked = false;
-                    }, delay)
+                    }, delay);
                 }, 25);
-            }, delay)
+            }, delay);
         }
     };
 
@@ -156,7 +149,7 @@
                     .triggerHandler('resize.flexbox-fix');
                 setTimeout(function () {
                     locked = false;
-                }, delay)
+                }, delay);
             }, 25);
         }, delay);
     };
@@ -190,14 +183,14 @@
         }
     });
 
-    $window.on('hashchange', function(event){
-        if(location.hash == '' || location.hash == '#'){
+    $window.on('hashchange', function (event) {
+        if (location.hash == '' || location.hash == '#') {
             event.preventDefault();
             event.stopPropagation();
             $main._hide();
         }
 
-        else if ($main_articles.filter(location.hash).length > 0){
+        else if ($main_articles.filter(location.hash).length > 0) {
             event.preventDefault();
             event.stopPropagation();
             $main._show(location.hash.substr(1));
@@ -206,24 +199,24 @@
 
     if ('scrollRestoration' in history)
         history.scrollRestoration = 'manual';
-    else{
+    else {
         var oldScrollPos = 0,
             scrollPos = 0,
             $htmlbody = $('html,body');
         $window
-            .on('scroll', function(){
+            .on('scroll', function () {
                 oldScrollPos = scrollPos;
                 scrollPos = $htmlbody.scrollTop();
             })
-            .on('hashchange', function(){
+            .on('hashchange', function () {
                 $window.scrollTop(oldScrollPos);
-            })
+            });
     }
 
     $main.hide();
     $main_articles.hide();
-    if(location.hash != '' && location.hash !== '#')
-        $window.on('load', function(){
+    if (location.hash != '' && location.hash !== '#')
+        $window.on('load', function () {
             $main._show(location.hash.substr(1), true);
-        })
+        });
 })(jQuery);
